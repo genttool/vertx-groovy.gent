@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link rel="stylesheet/less" href="css/bootstrap.less">
+        <script src="js3rdparty/less-1.2.1.min.js"></script>
+        <script src='js3rdparty/jquery-1.7.1.min.js'></script>
+        <script src='js3rdparty/bootstrap-tabs.js'></script>
+        <title>Welcome to ${name} vert.x App</title>
+    </head>
+
+    <body>
+        <h1>Hello World</h1>
+    </body>
+
+    <script>
+      $(document).ready(function () {
+        // start here
+      })
+    </script>
+
+    <script src='js3rdparty/sockjs-0.2.1.min.js'></script>
+    <script src='js3rdparty/knockout-2.0.0.js'></script>
+    <script src='js/vertxbus.js'></script>
+    <script src='js/client_app.js'></script>
+
+</html>

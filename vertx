@@ -1,0 +1,2 @@
+./gradlew build
+(cd build/staging && vert.x-1.2.3.final/bin/vertx "$@")

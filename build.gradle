@@ -1,0 +1,56 @@
+def buildDir = 'build'
+def stagingDir = "${buildDir}/staging"
+
+repositories {
+    mavenCentral()
+    mavenRepo url:'http://repo.springsource.org/libs-snapshot'
+    add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+        name = 'vertx.io'
+        addArtifactPattern 'http://[organisation]/downloads/[module]-[revision].[ext]'
+    }
+}
+
+configurations {
+    framework
+}
+
+dependencies {
+    framework "vertx.io:vert.x:${vertxVersion}@zip"
+}
+
+task runtime(type: Copy) {
+
+    destinationDir file("${stagingDir}")
+
+    from configurations.framework
+    doLast {
+        ant.unzip(src: "${stagingDir}/vert.x-${vertxVersion}.zip", dest: "${stagingDir}")
+        ant.delete(file: "${stagingDir}/vert.x-${vertxVersion}.zip")
+        ant.delete(dir: "${stagingDir}/vert.x-${vertxVersion}/api-docs")
+        ant.delete(dir: "${stagingDir}/vert.x-${vertxVersion}/examples")
+        ant.delete(dir: "${stagingDir}/vert.x-${vertxVersion}/client")
+        ant.move(file:"${stagingDir}/vert.x-${vertxVersion}", tofile:"${stagingDir}/vert.x")
+    }
+
+}
+
+task build(type: Copy, dependsOn: 'runtime') {
+
+    destinationDir file("${stagingDir}")
+
+    from('src') {
+        into "."
+    }
+
+}
+
+task assemble(type: Zip, dependsOn: 'build') {
+    destinationDir = file("${buildDir}")
+    outputs.dir destinationDir
+    archiveName = "${appZip}"
+    from file("${stagingDir}")
+}
+
+task clean(type: Delete)    { delete "${buildDir}"  }
+
+task wrapper(type: Wrapper) { gradleVersion = "1.2" }

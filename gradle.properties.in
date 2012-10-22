@@ -1,0 +1,2 @@
+appZip=${name}.zip
+vertxVersion=1.2.3.final
