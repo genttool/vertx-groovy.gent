@@ -13,7 +13,7 @@
 
     <script>
         \$(document).ready(function () {
-        // start here
+            // start here
         })
     </script>
 
