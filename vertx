@@ -1,2 +1,2 @@
-./gradlew build
+./gradlew -q build
 (cd build/staging && vert.x/bin/vertx "$@")
