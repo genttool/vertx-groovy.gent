@@ -30,6 +30,7 @@ task runtime(type: Copy) {
         ant.delete(dir: "${stagingDir}/vert.x-${vertxVersion}/examples")
         ant.delete(dir: "${stagingDir}/vert.x-${vertxVersion}/client")
         ant.move(file:"${stagingDir}/vert.x-${vertxVersion}", tofile:"${stagingDir}/vert.x")
+        ant.chmod(perm:"a+x", file:"${stagingDir}/vert.x/bin/vertx")
     }
 
 }
